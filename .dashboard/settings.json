@@ -1,0 +1,11 @@
+{
+  "weeklyGoal": 5,
+  "timezone": "Asia/Calcutta",
+  "botRepo": "daily-streak",
+  "reminder": {
+    "enabled": true,
+    "hour": 18,
+    "channel": "email"
+  },
+  "dashboardUrl": "http://localhost:3000"
+}

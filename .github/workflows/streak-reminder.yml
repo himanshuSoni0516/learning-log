@@ -1,0 +1,33 @@
+# Installed by Streak Dashboard. Edit settings from the dashboard instead of here.
+name: Streak reminder
+
+on:
+  schedule:
+    - cron: "5 * * * *" # hourly; the script only sends at your chosen local hour
+  workflow_dispatch:
+    inputs:
+      test:
+        description: Send a test message now
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+
+jobs:
+  remind:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: node .dashboard/reminder.mjs
+        env:
+          GH_TOKEN: ${{ secrets.STREAK_PAT || secrets.GITHUB_TOKEN }}
+          GH_LOGIN: ${{ github.repository_owner }}
+          FORCE: ${{ github.event_name == 'workflow_dispatch' && inputs.test }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          REMINDER_EMAIL: ${{ secrets.REMINDER_EMAIL }}
