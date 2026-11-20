@@ -4,8 +4,8 @@
   "botRepo": "daily-streak",
   "reminder": {
     "enabled": true,
-    "hour": 18,
-    "channel": "email"
+    "hour": 17,
+    "channel": "telegram"
   },
   "dashboardUrl": "http://localhost:3000"
 }
